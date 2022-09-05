@@ -1,6 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:flutter/material.dart';
-import 'package:git_companion/common/test_styles.dart';
+import 'package:flutter/material.dart'
 import 'package:git_companion/data/primary_options.dart';
 import 'package:git_companion/data/secondary_options.dart';
 import 'package:git_companion/data/tertiary_options.dart';
@@ -8,9 +7,13 @@ import 'package:git_companion/responsive.dart';
 import 'package:git_companion/screens/dashboard/components/common_dropdown.dart';
 import 'package:git_companion/screens/dashboard/components/header.dart';
 import 'package:git_companion/screens/dashboard/components/result.dart';
+
 import '../../../constants.dart';
 
 class Dashboard extends StatefulWidget {
+  Dashboard({
+    Key? key,
+  }) : super(key: key);
   @override
   _DashboardState createState() => _DashboardState();
 }
