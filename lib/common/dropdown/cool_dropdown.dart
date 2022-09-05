@@ -1,9 +1,9 @@
 library cool_dropdown;
 
 import 'package:flutter/material.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/drop_down_body.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/utils/animation_util.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/utils/extension_util.dart';
+import 'package:git_companion/common/dropdown/drop_down_body.dart';
+import 'package:git_companion/common/dropdown/utils/animation_util.dart';
+import 'package:git_companion/common/dropdown/utils/extension_util.dart';
 
 class CoolDropdown extends StatefulWidget {
   List dropdownList;

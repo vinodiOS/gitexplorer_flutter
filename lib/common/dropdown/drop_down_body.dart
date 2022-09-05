@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/utils/animation_util.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/utils/extension_util.dart';
+import 'package:git_companion/common/dropdown/utils/animation_util.dart';
+import 'package:git_companion/common/dropdown/utils/extension_util.dart';
 
 class DropdownBody extends StatefulWidget {
   Key key;
