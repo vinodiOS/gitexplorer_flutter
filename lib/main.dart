@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'package:git_companion/core/adaptive_theme.dart';
@@ -13,6 +14,7 @@ void main() async {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AdaptiveModel()),
+        ChangeNotifierProvider(create: (context) => DashboardProvider()),
       ],
       child: GitCompanion(
         mode: savedThemeMode ?? AdaptiveThemeMode.light,
@@ -38,7 +40,7 @@ class GitCompanion extends StatelessWidget {
         title: "Git Explorer",
         theme: theme,
         darkTheme: darkTheme,
-        home: Dashboard(),
+        home: const Dashboard(),
       ),
     );
   }

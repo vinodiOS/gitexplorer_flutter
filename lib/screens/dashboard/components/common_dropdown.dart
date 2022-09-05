@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:git_companion/responsive.dart';
-import 'package:git_companion/screens/dashboard/components/dropdown/cool_dropdown.dart';
+import 'package:git_companion/common/dropdown/cool_dropdown.dart';
+import 'package:git_companion/common/responsive.dart';
 
 class CommonDropdown extends StatelessWidget {
   List<Map<String, String>> dropdownList;
