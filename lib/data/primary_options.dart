@@ -1,4 +1,4 @@
-const primaryOptions = [
+List<Map<String, String>> primaryOptions = [
   {'value': 'add', 'label': 'add'},
   {'value': 'commit', 'label': 'commit'},
   {'value': 'revert', 'label': 'revert/reset'},
@@ -20,3 +20,11 @@ const primaryOptions = [
   {'value': 'rebase', 'label': 'rebase'},
   {'value': 'cherrypick', 'label': 'cherry-pick'},
 ];
+
+List<Map<String, String>> get sortedPrimaryOptions {
+  List<Map<String, String>> test = List.from(primaryOptions);
+  test.sort(
+    (a, b) => a['label']!.toLowerCase().compareTo(b['label']!.toLowerCase()),
+  );
+  return test;
+}

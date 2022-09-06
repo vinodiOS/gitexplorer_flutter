@@ -1,12 +1,17 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:git_companion/core/app_color.dart';
+import 'package:git_companion/data/primary_options.dart';
 import 'package:git_companion/provider/adaptive_mode.dart';
 import 'package:git_companion/screens/dashboard/components/result.dart';
 
 class DashboardProvider extends ChangeNotifier {
   late bool _isFastSpeed = false;
   late Result _result;
+
+  List<Map<String, String>> get primaryCommands {
+    return sortedPrimaryOptions;
+  }
 
   bool get speed => _isFastSpeed;
   Result get initialResult => _result;

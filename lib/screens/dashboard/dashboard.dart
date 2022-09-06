@@ -1,7 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:git_companion/core/app_color.dart';
-import 'package:git_companion/data/primary_options.dart';
 import 'package:git_companion/data/secondary_options.dart';
 import 'package:git_companion/data/tertiary_options.dart';
 import 'package:git_companion/common/responsive.dart';
@@ -9,6 +8,7 @@ import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:git_companion/screens/dashboard/components/common_dropdown.dart';
 import 'package:git_companion/screens/dashboard/components/header.dart';
 import 'package:git_companion/screens/dashboard/components/result.dart';
+import 'package:git_companion/screens/dashboard/components/title_text.dart';
 import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
@@ -38,42 +38,8 @@ class DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
-    /*
-    conColor = AdaptiveTheme.of(context).mode.isDark
-        ? boxDecorationDark
-        : boxDecorationLight;
-    result = Result(
-        commandText: "",
-        noteText: null,
-        conColor: conColor,
-        isModeChanged: false,
-        speedChanged: false);*/
     Provider.of<DashboardProvider>(context, listen: false).getInitialResult();
     super.initState();
-  }
-
-  Header header(DashboardProvider provider) {
-    return Header();
-    /*
-    Header(
-      modeSwitched: () {
-        setState(() {
-          conColor = AdaptiveTheme.of(context).mode.isDark
-              ? boxDecorationDark
-              : boxDecorationLight;
-          result = Result(
-            commandText: result.commandText,
-            noteText: result.noteText,
-            conColor: conColor,
-            isModeChanged: true,
-            speedChanged: isHighSpeed,
-          );
-        });
-      },
-      speedChanged: (value) {
-        isHighSpeed = value;
-      },
-    );*/
   }
 
   @override
@@ -89,7 +55,7 @@ class DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.all(40),
             child: Column(
               children: [
-                header(dashboardModel),
+                Header(),
                 const SizedBox(height: 50),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -104,29 +70,9 @@ class DashboardState extends State<Dashboard> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.stretch,
                             children: [
-                              title(),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              subtitle(),
-                              const SizedBox(
-                                height: 40,
-                              ),
-                              Text(
-                                "I want to:",
-                                style: TextStyle(
-                                    letterSpacing: 1,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: AdaptiveTheme.of(context)
-                                        .theme
-                                        .primaryColor),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
+                              const DashboardTitle(),
                               CommonDropdown(
-                                dropdownList: primaryOptions,
+                                dropdownList: dashboardModel.primaryCommands,
                                 onCommandSelection: (value) {
                                   if (secondaryOptions[value['value']] !=
                                       null) {
@@ -240,13 +186,12 @@ class DashboardState extends State<Dashboard> {
                           const SizedBox(height: defaultPadding),
                           if (Responsive.isMobile(context))
                             const SizedBox(height: defaultPadding),
-                          if (Responsive.isMobile(context)) result
+                          if (Responsive.isMobile(context)) value.initialResult
                         ],
                       ),
                     ),
                     if (!Responsive.isMobile(context))
                       const SizedBox(width: defaultPadding),
-                    // On Mobile means if the screen is less than 850 we dont want to show it
                     if (!Responsive.isMobile(context))
                       Expanded(
                         flex: 5,
@@ -260,38 +205,5 @@ class DashboardState extends State<Dashboard> {
         ),
       );
     }));
-  }
-
-  title() {
-    return Text.rich(
-      TextSpan(
-        children: [
-          const TextSpan(
-              text: 'Git',
-              style: TextStyle(
-                  letterSpacing: 1, fontSize: 24, fontWeight: FontWeight.bold)),
-          TextSpan(
-            text: ' Command ',
-            style: TextStyle(
-                letterSpacing: 1,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-                color: AdaptiveTheme.of(context).theme.primaryColor),
-          ),
-          const TextSpan(
-              text: 'Explorer',
-              style: TextStyle(
-                  letterSpacing: 1, fontSize: 24, fontWeight: FontWeight.bold)),
-        ],
-      ),
-    );
-  }
-
-  subtitle() {
-    return Text(
-      "Find the right commands you need\nwithout digging through the web.",
-      textAlign: TextAlign.start,
-      style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-    );
   }
 }
