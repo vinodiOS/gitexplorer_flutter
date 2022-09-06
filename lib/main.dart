@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:git_companion/core/app_color.dart';
 import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -14,10 +15,13 @@ void main() async {
   runApp(MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => AdaptiveModel()),
-        ChangeNotifierProvider(create: (context) => DashboardProvider()),
+        ChangeNotifierProvider(
+            create: (context) => DashboardProvider(savedThemeMode.isDark
+                ? boxDecorationDark
+                : boxDecorationLight)),
       ],
       child: GitCompanion(
-        mode: savedThemeMode ?? AdaptiveThemeMode.light,
+        mode: savedThemeMode,
       )));
 }
 

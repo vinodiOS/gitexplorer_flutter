@@ -1,8 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:git_companion/core/app_color.dart';
-import 'package:git_companion/data/secondary_options.dart';
-import 'package:git_companion/data/tertiary_options.dart';
 import 'package:git_companion/common/responsive.dart';
 import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:git_companion/screens/dashboard/components/common_dropdown.dart';
@@ -31,10 +29,10 @@ class DashboardState extends State<Dashboard> {
   late Color conColor;
   bool isHighSpeed = false;
   late Result result;
-
+/*
   TextEditingController primaryTextController = TextEditingController();
   TextEditingController secondaryTextController = TextEditingController();
-  TextEditingController tertiaryTextController = TextEditingController();
+  TextEditingController tertiaryTextController = TextEditingController();*/
 
   @override
   void initState() {
@@ -74,112 +72,42 @@ class DashboardState extends State<Dashboard> {
                               CommonDropdown(
                                 dropdownList: dashboardModel.primaryCommands,
                                 onCommandSelection: (value) {
-                                  if (secondaryOptions[value['value']] !=
-                                      null) {
-                                    if (recent == '' ||
-                                        recent == value['value']) {
-                                      setState(() {
-                                        secondaryOptionsList =
-                                            secondaryOptions[value['value']]!;
-                                        _isSecondaryAvailable = true;
-                                        recent = value['value']!;
-                                        primaryTextController.text =
-                                            value['label']!;
-                                        _isTertiaryAvailable = false;
-                                        tertiaryTextController.clear();
-                                      });
-                                      return;
-                                    }
-                                    if (recent != value['value']) {
-                                      setState(() {
-                                        secondaryOptionsList =
-                                            secondaryOptions[value['value']]!;
-                                        primaryTextController.text =
-                                            value['label']!;
-                                        recent = value['value']!;
-                                        _isTertiaryAvailable = false;
-                                        secondaryTextController.clear();
-                                        tertiaryTextController.clear();
-                                        result = Result(
-                                            commandText: "",
-                                            noteText: null,
-                                            conColor: AdaptiveTheme.of(context)
-                                                    .mode
-                                                    .isLight
-                                                ? boxDecorationLight
-                                                : boxDecorationDark,
-                                            isModeChanged: dashboardModel
-                                                .darkMode(context),
-                                            speedChanged: dashboardModel.speed);
-                                      });
-                                    }
-                                  } else {
-                                    setState(() {
-                                      _isSecondaryAvailable = false;
-                                    });
-                                  }
+                                  context
+                                      .read<DashboardProvider>()
+                                      .primaryValue = value;
                                 },
-                                textController: primaryTextController,
+                                textController:
+                                    dashboardModel.primaryTextController,
                               ),
                               const SizedBox(
                                 height: 15,
                               ),
-                              if (_isSecondaryAvailable)
+                              if (value.isSecondaryAvailable)
                                 CommonDropdown(
-                                  dropdownList: secondaryOptionsList,
+                                  dropdownList:
+                                      dashboardModel.secondaryOptionsList,
                                   onCommandSelection: (value) {
-                                    if (tertiaryOptions[value['value']] !=
-                                        null) {
-                                      setState(() {
-                                        tertiaryOptionsList =
-                                            tertiaryOptions[value['value']]!;
-                                        secondaryTextController.text =
-                                            value['label']!;
-                                        _isTertiaryAvailable = true;
-                                      });
-                                    } else {
-                                      setState(() {
-                                        _isTertiaryAvailable = false;
-                                        secondaryTextController.text =
-                                            value['label']!;
-                                        tertiaryTextController.clear();
-                                        result = Result(
-                                          commandText: value['usage']!,
-                                          noteText: value['nb'],
-                                          conColor: AdaptiveTheme.of(context)
-                                                  .mode
-                                                  .isLight
-                                              ? boxDecorationLight
-                                              : boxDecorationDark,
-                                          isModeChanged:
-                                              dashboardModel.darkMode(context),
-                                          speedChanged: dashboardModel.speed,
-                                        );
-                                      });
-                                    }
+                                    context
+                                        .read<DashboardProvider>()
+                                        .secondaryValue = value;
                                   },
-                                  textController: secondaryTextController,
+                                  textController:
+                                      dashboardModel.secondaryTextController,
                                 ),
                               const SizedBox(
                                 height: 15,
                               ),
-                              if (_isTertiaryAvailable)
+                              if (value.isTertiaryAvailable)
                                 CommonDropdown(
-                                  dropdownList: tertiaryOptionsList,
+                                  dropdownList:
+                                      dashboardModel.tertiaryOptionsList,
                                   onCommandSelection: (value) {
-                                    setState(() {
-                                      tertiaryTextController.text =
-                                          value['label']!;
-                                      result = Result(
-                                        commandText: value['usage']!,
-                                        noteText: value['nb'],
-                                        conColor: conColor,
-                                        isModeChanged: false,
-                                        speedChanged: isHighSpeed,
-                                      );
-                                    });
+                                    context
+                                        .read<DashboardProvider>()
+                                        .tertiaryValue = value;
                                   },
-                                  textController: tertiaryTextController,
+                                  textController:
+                                      dashboardModel.tertiaryTextController,
                                 )
                             ],
                           ),

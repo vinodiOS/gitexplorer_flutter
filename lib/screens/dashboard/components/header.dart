@@ -39,11 +39,6 @@ class Header extends StatelessWidget {
               inactiveTrackColor: AdaptiveTheme.of(context).theme.primaryColor,
               onChanged: (value) {
                 provider.changeFastSpeed();
-                /*
-                setState(() {
-                  isFastSpeed = !isFastSpeed;
-                  widget.speedChanged(isFastSpeed);
-                });*/
               }),
         ),
         Text(
@@ -74,14 +69,6 @@ class Header extends StatelessWidget {
                     AdaptiveTheme.of(context).theme.primaryColor,
                 onChanged: (value) {
                   provider.changeDarkMode(context);
-                  /*
-                  setState(() {
-                    isDarkMode = !isDarkMode;
-                    isDarkMode
-                        ? AdaptiveTheme.of(context).setDark()
-                        : AdaptiveTheme.of(context).setLight();
-                  });
-                  widget.modeSwitched();*/
                 })),
         Text(
           "Dark Mode",
