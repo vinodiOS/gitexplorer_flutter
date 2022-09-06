@@ -38,6 +38,7 @@ class DashboardState extends State<Dashboard> {
 
   @override
   void initState() {
+    /*
     conColor = AdaptiveTheme.of(context).mode.isDark
         ? boxDecorationDark
         : boxDecorationLight;
@@ -46,7 +47,8 @@ class DashboardState extends State<Dashboard> {
         noteText: null,
         conColor: conColor,
         isModeChanged: false,
-        speedChanged: false);
+        speedChanged: false);*/
+    Provider.of<DashboardProvider>(context, listen: false).getInitialResult();
     super.initState();
   }
 
@@ -160,8 +162,9 @@ class DashboardState extends State<Dashboard> {
                                                     .isLight
                                                 ? boxDecorationLight
                                                 : boxDecorationDark,
-                                            isModeChanged: false,
-                                            speedChanged: false);
+                                            isModeChanged: dashboardModel
+                                                .darkMode(context),
+                                            speedChanged: dashboardModel.speed);
                                       });
                                     }
                                   } else {
@@ -197,8 +200,13 @@ class DashboardState extends State<Dashboard> {
                                         result = Result(
                                           commandText: value['usage']!,
                                           noteText: value['nb'],
-                                          conColor: conColor,
-                                          isModeChanged: false,
+                                          conColor: AdaptiveTheme.of(context)
+                                                  .mode
+                                                  .isLight
+                                              ? boxDecorationLight
+                                              : boxDecorationDark,
+                                          isModeChanged:
+                                              dashboardModel.darkMode(context),
                                           speedChanged: dashboardModel.speed,
                                         );
                                       });
@@ -242,7 +250,7 @@ class DashboardState extends State<Dashboard> {
                     if (!Responsive.isMobile(context))
                       Expanded(
                         flex: 5,
-                        child: result,
+                        child: value.initialResult,
                       ),
                   ],
                 )

@@ -65,8 +65,8 @@ class Header extends StatelessWidget {
         Material(
             color: Colors.transparent,
             child: Switch(
-                value:
-                    provider.darkMode || AdaptiveTheme.of(context).mode.isDark,
+                value: provider.darkMode(context) ||
+                    AdaptiveTheme.of(context).mode.isDark,
                 activeColor: Colors.white,
                 inactiveThumbColor: Colors.white,
                 activeTrackColor: AdaptiveTheme.of(context).theme.primaryColor,

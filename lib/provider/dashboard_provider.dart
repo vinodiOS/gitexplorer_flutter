@@ -1,13 +1,19 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:git_companion/core/app_color.dart';
+import 'package:git_companion/provider/adaptive_mode.dart';
 import 'package:git_companion/screens/dashboard/components/result.dart';
 
 class DashboardProvider extends ChangeNotifier {
   late bool _isFastSpeed = false;
-  late bool _isDarkMode = false;
+  late Result _result;
 
   bool get speed => _isFastSpeed;
-  bool get darkMode => _isDarkMode;
+  Result get initialResult => _result;
+
+  bool darkMode(BuildContext context) {
+    return AdaptiveTheme.of(context).mode.isDark;
+  }
 
   void changeFastSpeed() {
     _isFastSpeed = !_isFastSpeed;
@@ -15,10 +21,32 @@ class DashboardProvider extends ChangeNotifier {
   }
 
   void changeDarkMode(BuildContext context) {
-    _isDarkMode = !_isDarkMode;
-    _isDarkMode
-        ? AdaptiveTheme.of(context).setDark()
-        : AdaptiveTheme.of(context).setLight();
+    bool isDark = AdaptiveTheme.of(context).mode.isDark;
+    isDark
+        ? AdaptiveTheme.of(context).setLight()
+        : AdaptiveTheme.of(context).setDark();
+    final conColor = isDark ? boxDecorationLight : boxDecorationDark;
+    _result = Result(
+        commandText: "",
+        noteText: null,
+        conColor: conColor,
+        isModeChanged: false,
+        speedChanged: false);
+    isDark
+        ? AdaptiveTheme.of(context).setLight()
+        : AdaptiveTheme.of(context).setDark();
+    notifyListeners();
+  }
+
+  getInitialResult() async {
+    final theme = await AdaptiveModel().getMode();
+    final conColor = theme.isDark ? boxDecorationDark : boxDecorationLight;
+    _result = Result(
+        commandText: "",
+        noteText: null,
+        conColor: conColor,
+        isModeChanged: false,
+        speedChanged: false);
     notifyListeners();
   }
 }

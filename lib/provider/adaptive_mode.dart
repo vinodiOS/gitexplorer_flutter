@@ -5,8 +5,9 @@ class AdaptiveModel extends ChangeNotifier {
   AdaptiveThemeMode? _mode;
   AdaptiveThemeMode? get mode => _mode;
 
-  Future<AdaptiveThemeMode?> getMode() async {
+  Future<AdaptiveThemeMode> getMode() async {
     _mode = await AdaptiveTheme.getThemeMode();
-    return _mode;
+    if (_mode == null) return AdaptiveThemeMode.light;
+    return _mode!;
   }
 }
