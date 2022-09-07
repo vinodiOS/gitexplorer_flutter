@@ -5,6 +5,8 @@ import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class Header extends StatelessWidget {
+  const Header({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     if (!Responsive.isMobile(context)) {

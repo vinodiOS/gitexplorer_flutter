@@ -5,7 +5,6 @@ import 'package:git_companion/common/responsive.dart';
 import 'package:git_companion/provider/dashboard_provider.dart';
 import 'package:git_companion/screens/dashboard/components/common_dropdown.dart';
 import 'package:git_companion/screens/dashboard/components/header.dart';
-import 'package:git_companion/screens/dashboard/components/result.dart';
 import 'package:git_companion/screens/dashboard/components/title_text.dart';
 import 'package:provider/provider.dart';
 
@@ -18,22 +17,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class DashboardState extends State<Dashboard> {
-  bool _isSecondaryAvailable = false;
-  bool _isTertiaryAvailable = false;
-  List<Map<String, String>> secondaryOptionsList = [];
-  List<Map<String, String>> tertiaryOptionsList = [];
-  String recent = '';
-  String commandText = '';
-  String noteText = '';
-  bool isNoteVisible = false;
-  late Color conColor;
-  bool isHighSpeed = false;
-  late Result result;
-/*
-  TextEditingController primaryTextController = TextEditingController();
-  TextEditingController secondaryTextController = TextEditingController();
-  TextEditingController tertiaryTextController = TextEditingController();*/
-
   @override
   void initState() {
     Provider.of<DashboardProvider>(context, listen: false).getInitialResult();
@@ -53,7 +36,7 @@ class DashboardState extends State<Dashboard> {
             padding: const EdgeInsets.all(40),
             child: Column(
               children: [
-                Header(),
+                const Header(),
                 const SizedBox(height: 50),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
