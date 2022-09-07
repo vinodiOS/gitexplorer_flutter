@@ -25,30 +25,33 @@ class Header extends StatelessWidget {
 
   Widget _textSpeedWidget(BuildContext context) {
     final provider = Provider.of<DashboardProvider>(context, listen: false);
-    return Row(
-      children: [
-        Text(
-          "Normal type speed",
-          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-        ),
-        Material(
-          color: Colors.transparent,
-          child: Switch(
-              value: provider.speed, //isFastSpeed,
-              activeColor: Colors.white,
-              inactiveThumbColor: Colors.white,
-              activeTrackColor: AdaptiveTheme.of(context).theme.primaryColor,
-              inactiveTrackColor: AdaptiveTheme.of(context).theme.primaryColor,
-              onChanged: (value) {
-                provider.changeFastSpeed();
-              }),
-        ),
-        Text(
-          "Fast type speed",
-          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-        ),
-      ],
-    );
+    return Consumer<DashboardProvider>(builder: ((context, value, child) {
+      return Row(
+        children: [
+          Text(
+            "Normal type speed",
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          ),
+          Material(
+            color: Colors.transparent,
+            child: Switch(
+                value: provider.speed,
+                activeColor: Colors.white,
+                inactiveThumbColor: Colors.white,
+                activeTrackColor: AdaptiveTheme.of(context).theme.primaryColor,
+                inactiveTrackColor:
+                    AdaptiveTheme.of(context).theme.primaryColor,
+                onChanged: (value) {
+                  provider.changeFastSpeed();
+                }),
+          ),
+          Text(
+            "Fast type speed",
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          ),
+        ],
+      );
+    }));
   }
 
   Widget _darkModeWidget(BuildContext context) {
