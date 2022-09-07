@@ -56,30 +56,33 @@ class Header extends StatelessWidget {
 
   Widget _darkModeWidget(BuildContext context) {
     final provider = Provider.of<DashboardProvider>(context, listen: false);
-    return Row(
-      children: [
-        Text(
-          "Light Mode",
-          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-        ),
-        Material(
-            color: Colors.transparent,
-            child: Switch(
-                value: provider.darkMode(context) ||
-                    AdaptiveTheme.of(context).mode.isDark,
-                activeColor: Colors.white,
-                inactiveThumbColor: Colors.white,
-                activeTrackColor: AdaptiveTheme.of(context).theme.primaryColor,
-                inactiveTrackColor:
-                    AdaptiveTheme.of(context).theme.primaryColor,
-                onChanged: (value) {
-                  provider.changeDarkMode(context);
-                })),
-        Text(
-          "Dark Mode",
-          style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
-        ),
-      ],
-    );
+    return Consumer<DashboardProvider>(builder: ((context, value, child) {
+      return Row(
+        children: [
+          Text(
+            "Light Mode",
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          ),
+          Material(
+              color: Colors.transparent,
+              child: Switch(
+                  value: provider.darkMode(context) ||
+                      AdaptiveTheme.of(context).mode.isDark,
+                  activeColor: Colors.white,
+                  inactiveThumbColor: Colors.white,
+                  activeTrackColor:
+                      AdaptiveTheme.of(context).theme.primaryColor,
+                  inactiveTrackColor:
+                      AdaptiveTheme.of(context).theme.primaryColor,
+                  onChanged: (value) {
+                    provider.changeDarkMode(context);
+                  })),
+          Text(
+            "Dark Mode",
+            style: AdaptiveTheme.of(context).theme.textTheme.bodyText1,
+          ),
+        ],
+      );
+    }));
   }
 }

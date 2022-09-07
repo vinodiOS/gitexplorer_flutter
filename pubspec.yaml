@@ -37,6 +37,10 @@ dependencies:
   provider: ^6.0.3
   animated_text_kit: ^4.2.2
   adaptive_theme: ^3.1.1
+  window_size:
+    git:
+      url: https://github.com/google/flutter-desktop-embedding.git
+      path: plugins/window_size
 
 
 dev_dependencies:

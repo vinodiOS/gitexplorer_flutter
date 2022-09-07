@@ -1,10 +1,8 @@
 import 'dart:async';
-
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:git_companion/core/app_color.dart';
 
 class Result extends StatelessWidget {
   final String commandText;

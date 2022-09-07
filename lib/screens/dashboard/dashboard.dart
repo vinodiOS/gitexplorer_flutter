@@ -21,7 +21,9 @@ class Dashboard extends StatelessWidget {
         body: SafeArea(
           child: SingleChildScrollView(
             primary: false,
-            padding: const EdgeInsets.all(40),
+            padding: Responsive.isMobile(context)
+                ? const EdgeInsets.all(20)
+                : const EdgeInsets.all(40),
             child: Column(
               children: [
                 const Header(),
