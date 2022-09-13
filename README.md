@@ -1,4 +1,4 @@
-# git_companion
+# Git Explorer
 
 A new Flutter project.
 
