@@ -17,6 +17,10 @@ class Dashboard extends StatelessWidget {
 
     return Consumer<DashboardProvider>(builder: ((context, value, child) {
       return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AdaptiveTheme.of(context).theme.primaryColor,
+          title: Text("Git Explorer"),
+        ),
         backgroundColor: AdaptiveTheme.of(context).theme.backgroundColor,
         body: SafeArea(
           child: SingleChildScrollView(

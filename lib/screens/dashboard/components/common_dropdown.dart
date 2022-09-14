@@ -19,7 +19,7 @@ class CommonDropdown extends StatelessWidget {
           ? MediaQuery.of(context).size.width
           : MediaQuery.of(context).size.width * 0.3,
       dropdownWidth: Responsive.isMobile(context)
-          ? MediaQuery.of(context).size.width - 100
+          ? MediaQuery.of(context).size.width //- 100
           : MediaQuery.of(context).size.width * 0.3 - 20,
       isTriangle: false,
       gap: 0,
